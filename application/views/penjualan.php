@@ -86,7 +86,7 @@
                         <input type="hidden" class="form-control" name="id" id="id">
                         <select name="id_judul" id="id_judul" class="form-control">
                             <option value="" selected disabled>Pilih Buku ....</option>
-                            <?php foreach ($join as $ph) : ?>
+                            <?php foreach ($buku as $ph) : ?>
                                 <option value="<?= $ph->id_buku ?>"><?= $ph->judul ?></option>
                             <?php endforeach; ?>
                         </select>

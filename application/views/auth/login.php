@@ -27,7 +27,7 @@
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                <center><img src="<?php echo base_url('./assets/img/Gramedia_logo.png')?>" width="120px"></center>
+                                <center><img src="<?php echo base_url('./assets/img/')?>" width="120px"></center>
                                     <h3 class="text-center font-weight-light my-4">Login</h3>
                                 </div>
                                 <?php echo $this->session->flashdata('message') ?>

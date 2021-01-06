@@ -19,11 +19,11 @@
                         <thead>
                             <tr>
                                 <th>Nomor</th>
-                                <th>ID Buku</th>
-                                <th>Judul Buku</th>
-                                <th>Penulis</th>
-                                <th>Genre</th>
-                                <th>Foto</th>
+                                <th>Kode Produk</th>
+                                <th>Nama Produk</th>
+                                <th>Keterngan</th>
+                                <th>Harga</th>
+                                <th>Jumlah</th>
                                 <th>Harga</th>
                                 <th>Opsi</th>
                             </tr>
@@ -34,21 +34,19 @@
                             foreach ($list as $al) : ?>
                                 <tr>
                                     <td><?php echo $no++ ?></td>
-                                    <td><?php echo $al->id_buku ?></td>
-                                    <td><?php echo $al->judul ?></td>
-                                    <td><?php echo $al->penulis ?></td>
-                                    <td><?php echo $al->genre ?></td>
-                                    <td><img src="<?php echo base_url('./assets/buku/'). $al->foto?>" width="120px"></td>
+                                    <td><?php echo $al->kodeproduk ?></td>
+                                    <td><?php echo $al->nama_produk?></td>
+                                    <td><?php echo $al->keterangan ?></td>
                                     <td><?php echo $al->harga ?></td>
+                                    <td><?php echo $al->jumlah ?></td>
                                     <td class="text-center">
                                         <a href="javascript:void(0)" class="btn btn-sm btn-primary" title="Edit" onclick="edit(
-                                        '<?= $al->id_buku ?>',
-                                        '<?= $al->judul?>',
-                                        '<?= $al->penulis ?>',
-                                        '<?= $al->genre ?>',
-                                        '<?= $al->foto ?>',
+                                        '<?= $al->kodeproduk ?>',
+                                        '<?= $al->nama_produk?>',
+                                        '<?= $al->keterangan ?>',
                                         '<?= $al->harga ?>',
-                                    )"><i class="fa fa-edit"></i></a> <br> <a href="<?= base_url('delete_buku/' . $al->id_buku) ?>" class="btn btn-sm btn-danger m-2"><i class="fa fa-trash"></i></a>
+                                        '<?= $al->jumlah?>',
+                                    )"><i class="fa fa-edit"></i></a> <br> <a href="<?= base_url('delete_buku/' . $al->kodeproduk) ?>" class="btn btn-sm btn-danger m-2"><i class="fa fa-trash"></i></a>
                                         <!-- <br> <a href="#" class="btn btn-sm btn-info mt-2"><i class="fas fa-info-circle"></i></a> -->
                                     </td>
                                 </tr>
@@ -64,57 +62,36 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Buku</h4>
+                <h4 class="modal-title">Tambah Produk</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('insert_buku') ?>" enctype="multipart/form-data" method="post" id="formBuku">
+            <form action="<?= base_url('insert_produk') ?>" enctype="multipart/form-data" method="post" id="formProduk">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-4">
-                            <label for="nim">ID Buku</label>
-                            <input type="text" class="form-control" name="id_buku" id="id_buku" placeholder="ID Buku">
+                            <label for="kodeproduk">Kode Produk/label>
+                            <input type="text" class="form-control" name="kodeproduk" id="kodeproduk" placeholder="Kode Produk">
                         </div>
                        
                         <div class="col-4">
-                            <label for="judul">Judul Buku</label>
-                            <input type="text" class="form-control" name="judul" id="judul" placeholder="Judul Buku">
+                            <label for="nama_produk">Nama Produk</label>
+                            <input type="text" class="form-control" name="nama_produk" id="nama_produk" placeholder="Nama Produk">
                         </div>
 
                         <div class="col-4">
-                            <label for="penulis">Penulis</label>
-                            <input type="text" class="form-control" name="penulis" id="penulis" placeholder="Judul Buku">
+                            <label for="keterangan">Keterangan</label>
+                            <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="keterangan">
                         </div>
 
-                        <div class="row mt-3">
-                        <div class="col-4">
-                            <label for="genre">Genre Buku</label>
-                            <select name="genre" id="genre" class="form-control" required>
-                                <option value="" selected disabled>Pilih ....</option>
-                                <option value="Horor">Horor</option>
-                                <option value="Fantasi">Fantasi</option>
-                                <option value="Romantis">Romantis</option>
-                                <option value="Sci-Fi">Sci-Fi</option>
-                                <option value="Komedi">Komedi</option>
-                                <option value="Misteri">Misteri</option>
-                                <option value="Petulangan">Petulangan</option>
-                                <option value="Biografi">Biografi</option>
-                                <option value="Pendidikan">Pendidikan</option>
-                                <option value="Ensklopedia">Ensklopedia</option>
-                                <option value="Jurnal">Jurnal</option>
-                                <option value="Filsafat">Filsafat</option>
-                                <option value="Agama">Agama</option>
-                                                            </select>
-                        </div>
-
-                        <div class="form-group">
-                        <label for="foto">Upload Foto Profil</label>
-                        <input type="file" class="form-control" name="foto" id="foto"  required>
-                    </div>
                         <div class="col-4">
                             <label for="harga">Harga</label>
                             <input type="text" class="form-control" name="harga" id="harga" placeholder="Alamat..." required>
+                        </div>
+                        <div class="col-4">
+                            <label for="jumlah">Jumlah</label>
+                            <input type="text" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah..." required>
                         </div>
                         
                     
@@ -130,18 +107,18 @@
     <!-- /.modal-dialog -->
 </div>
 <script>
-    function edit(id_buku,foto, judul penulis,genre,harga) {
+    function edit(kodeproduk, nama_produk keterangan,harga,jumlah) {
         let url = "<?= site_url('update_buku') ?>"
         console.log(foto);
         
-        $('#formBuku').attr('action', url);
+        $('#formProduk').attr('action', url);
         $('#modal-lg').modal('show');
-        $('#formBuku #id_buku').val(id_buku);
+        $('#formProduk #kodeproduk').val(kodeproduk);
        //$('#formAlumni #foto').val(foto);
-        $('#formBuku #judul').val(judul);
-        $('#formBuku #alamat').val(penulis);
-        $('#formBuku #no_telp').val(genre);
-        $('#formBuku #email').val(harga);
+        $('#formProduk #nama_produk').val(nama_produk);
+        $('#formProduk #keterangan').val(keterangan);
+        $('#formProduk #harga').val(harga);
+        $('#formProduk #jumlah').val(jumlah);
         
 
     }
@@ -158,21 +135,21 @@
     $(document).ready(function() {
         $('#formBuku').validate({
             rules: {
-                id_buku: {
+                kodeproduk: {
                     required: true,
                     digits: true,
                 },
-                judul: {
+                nama_produk: {
                     required: true
                 },
-                penulis: {
+                keterangan: {
                     required: true,
                 },
-                genre: {
+                harga: {
                     required: true
 
                 },
-                harga: {
+                jumlah: {
                     required: true
                     digits: true
                 
@@ -180,21 +157,21 @@
                 
             },
             messages: {
-                id-buku: {
+                kodeproduk: {
                     required: "Inputan tidak boleh kosong",
                     digits: "Inputan harus angka"
                 },
-                judul: {
+                nama_produk: {
                     required: "Inputan tidak boleh kosong"
                 },
-                penulis: {
+                keterangan: {
                     required: "Inputan tidak boleh kosong"
                 },
-                genre: {
+                harga: {
                     required: "Inputan tidak boleh kosong"
                 },
 
-                harga: {
+                jumlah: {
                     required: "Inputan tidak boleh kosong",
                     digits: "Inputan harus angka"
                 },

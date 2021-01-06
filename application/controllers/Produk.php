@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class PengabdianAlumni extends CI_Controller
+class Produk extends CI_Controller
 {
 
     public function __construct()
@@ -9,57 +9,36 @@ class PengabdianAlumni extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
 
-        //    if (!$this->session->userdata('level') == 'alumni') {
-        //    redirect('');
-        //    }
-        $this->load->model('model_pengabdianalumni');
+        if (!$this->session->userdata('level') == 'admin') {
+            redirect('');
+        }
+        $this->load->model('model_buku');
     }
 
     public function index()
     {
         $data = [
             'level' => $this->session->userdata('level'),
-            'title' => 'Pengabdian Alumni',
-            'menu' => 'Master Data / Pengabdian Kepada Masyarakat Alumni'
+            'title' => 'Produk',
+            'menu' => 'Dashboard > Produk',
+        
         ];
 
-        $data['list'] = $this->model_pengabdianalumni->get_pengabdianalumni();
-        $data['pengabdian'] = $this->model_pengabdianalumni->get_pengabdian();
-
-        $this->template->load('layout/alumniDashboard', 'alumni/pengabdian_alumni', $data);
-    }
-
-    public function jsonPengabdian()
-    {
-        $id = $this->input->post('id');
-        // dd($id);
-        // die;
-
-        $pengabdian = $this->model_pengabdianalumni->get_pengabdianById($id);
-        // dd($pengabdian);
-        // die;
-
-        if ($pengabdian) {
-            $response['status'] = true;
-            $response['data'] = $pengabdian;
-        } else {
-            $response['status'] = false;
+        if ($this->input->get()){
+            $data['list'] = $this->model_buku->get_genre($this->input->get('pilih'));
         }
-        echo json_encode($response);
+        else {
+            $data['list'] = $this->model_buku->get_buku();
+        }
+        $this->template->load('template', 'produk', $data);
+
+
     }
 
-    public function insert_pengabdianalumni()
+    public function insert()
     {
         // $p = $this->input->post();
-        // $data = [
-        //     'nim' => $this->session->userdata('nim'),
-        //     'nama_tim' => $p['nama_tim'],
-
-        // ]
-
-
-
-        $insert = $this->model_pengabdianalumni->insert_pengabdianalumni();
+        $insert = $this->model_buku->insert_buku();
 
         if ($insert) {
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
@@ -70,12 +49,12 @@ class PengabdianAlumni extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <p style="margin-bottom: 0rem !important"><i class="icon fas fa-ban"></i> Data Gagal Ditambahkan</p></div>');
         }
-        redirect('alumni/prestasi');
+        redirect('produk');
     }
 
-    public function update_prestasi()
+    public function update()
     {
-        $update = $this->model_prestasi->update_prestasi();
+        $update = $this->mode_buku->update_alumni();
 
         if ($update) {
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
@@ -86,15 +65,14 @@ class PengabdianAlumni extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <p style="margin-bottom: 0rem !important"><i class="icon fas fa-ban"></i> Data Gagal Diubah</p></div>');
         }
-        redirect('alumni/prestasi');
+        redirect('produk');
     }
 
-
-    public function delete_prestasi($id_prestasi)
+    public function delete($kodeporudk)
     {
 
-        $query = $this->db->where('id_prestasi', $id_prestasi)
-            ->delete('tbl_prestasi');
+        $query = $this->db->where('id_buku', $id_buku)
+            ->delete('tbl_buku');
 
         if ($query) {
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
@@ -106,6 +84,23 @@ class PengabdianAlumni extends CI_Controller
                 <p style="margin-bottom: 0rem !important"><i class="icon fas fa-ban"></i> Data Gagal Dihapus</p></div>');
         }
 
-        redirect('alumni/prestasi');
+        redirect('buku');
     }
+
+
+    // --------------- INFO PROFIL --------------//
+/* 
+    public function profil($nim)
+    {
+
+        $data = [
+            'level' => $this->session->userdata('level'),
+            'title' => 'Profil Alumni',
+            'menu' => 'Profil Alumni'
+        ];
+        $data['alumni'] = $this->model_alumni->alumni_data($nim);
+        $this->template->load('layout/template', 'admin/profil', $data);
+    
+    }
+ */
 }

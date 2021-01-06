@@ -57,31 +57,14 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <a class="nav-link" href="<?= site_url('admin') ?>">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>FP Growth Penjualan Buku
+                            <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>Arkademy
                         </a>
 
                         <!-- <div class="sb-sidenav-menu-heading">MASTER DATA</div> -->
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Master Data
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="<?= site_url('buku') ?>">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                                    Buku
-                                </a>
-                                <a class="nav-link" href="<?= site_url('penjualan') ?>">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
-                                    Penjualan
-                                </a>
-                          
-                            </nav>
-                        </div>
-                        <a class="nav-link" href="<?= site_url('') ?>">
+                        
+                        <a class="nav-link" href="<?= site_url('produk') ?>">
                             <div class="sb-nav-link-icon"><i class="fa fa-tasks"></i></div>
-                            Proses FP-Grwoth
+                            Produk
                         </a>
                         <!-- <a class="nav-link" href="<?= site_url('alumni') ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
